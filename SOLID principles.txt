@@ -1,0 +1,49 @@
+SOLID principles for OOP programming
+These principles go together a great deal.  Some say they are 1 principle in many ways.
+The key lesson is to program to an interface, which frees you in many ways.
+Program to an interface, rather than an implementation, like the "Strategy" Design pattern.
+This maximizes polymorphism, which gives max flexibility,
+where different implementations can easily be made use of if we've programmed to an interface.
+If you are doing "is_a()" or "instanceof()" methods to check to see what kind of object you have, that's
+a giveaway that you're probably breaking the SOLID principles.
+
+
+Single responsibility:  Each class should only have 1 responsibility.  It maximizes the simplicity, maintainability, and
+ reusability of the code.  Ask yourself "could this class be used by any other part of the program if it were simpler."
+ This way, ***each class can be re-used a maximum number of times***, like Jon's ClickTripz answer key for that test.
+ Interfaces also should have 1 responsibility.  Fat/large interfaces and fat classes are bad, thin/small interfaces
+ and classes are good.
+
+Open for extension, but closed for modification:  The 1st part, make it simple to change the behavior.
+ The goal of the 2nd part (hard to do perfectly): without modifying the original source code.  The
+ reason why you don't want to modify the original source code is because you might introduce bugs.  ***Once
+ code is tested and it works, it's best to leave it alone and just extend it if new features need to be added.***
+ Separate the extensionable behavior behind an interface.
+
+Liskov Substitution:  This principle states that any implementation of an abstraction (interface) should be substitutable in any place that the abstraction is accepted.
+ Or in other words, "derived classes must be substitutable for their base classes."  This protects unexpected behavior\
+ from a descendant class from the original parent class.  Whatever the parent class does, the children should do
+ that and only that and no more.  For instance, don't check for an exception in the descendant class - put that in the
+ parent class.  Perhaps most importantly, this principle means that descendant classes should return the same type of value as the
+ parent class.  Otherwise, a consumer of the descendant class won't be interchangeable with another sibling class, because the
+ return data type differed.  It's ok to break this rule on occasion, though... (returning an array OR returning a collection
+ might be ok amongst sibling classes.).  ***Sibling classes should be interchangeable - put as much common features in the parent
+ class as possible.***
+ 1.  Signature must match
+ 2.  Preconditions can't be greater
+ 3.  Post conditions at least equal to
+ 4.  Exception types must match
+
+
+Interface Segregation Principle: states that a client should never be forced to implement an interface that it doesn’t use.
+ Fat/large interfaces and fat classes are bad, thin/small interfaces
+ and classes are good.  Separate out what you don't need everywhere, so that you can use
+ the smaller bits and pieces everywhere.  **You can implement multiple small interfaces in one class, or more, which is better
+ than implementing 1 big interface.**
+
+Dependency Inversion:  Depend on abstractions, not concretions.  Kind of saying the same thing
+once again:  program to an interface, not an implementation.  Dependency Inversion is not dependency injection.
+"Inversion" has to do with "who owns the interface": the interface, the implementation, or the customer class?
+The interface owns the implementation always.  **If you need a new interface, make a new interface.  Don't make the
+interface conform to the implementation or the customer class, especially when refactoring code, because it will
+break all of the other implementations that implement that interface!**
